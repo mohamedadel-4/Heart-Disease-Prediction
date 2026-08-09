@@ -1,0 +1,84 @@
+{
+  "numeric_features": [
+    "Age",
+    "Chest pain type",
+    "BP",
+    "Cholesterol",
+    "FBS over 120",
+    "EKG results",
+    "Max HR",
+    "Exercise angina",
+    "ST depression",
+    "Slope of ST",
+    "Number of vessels fluro",
+    "Thallium"
+  ],
+  "categorical_features": {
+    "Gender": [
+      "Female",
+      "Male"
+    ],
+    "work_type": [
+      "Govt_job",
+      "Private",
+      "Self-employed",
+      "children"
+    ],
+    "smoking_status": [
+      "Unknown",
+      "formerly smoked",
+      "never smoked",
+      "smokes"
+    ]
+  },
+  "numeric_ranges": {
+    "Age": {
+      "min": 29.0,
+      "max": 77.0
+    },
+    "Chest pain type": {
+      "min": 1.0,
+      "max": 4.0
+    },
+    "BP": {
+      "min": 94.0,
+      "max": 200.0
+    },
+    "Cholesterol": {
+      "min": 126.0,
+      "max": 564.0
+    },
+    "FBS over 120": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "EKG results": {
+      "min": 0.0,
+      "max": 2.0
+    },
+    "Max HR": {
+      "min": 71.0,
+      "max": 202.0
+    },
+    "Exercise angina": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "ST depression": {
+      "min": 0.0,
+      "max": 5.6
+    },
+    "Slope of ST": {
+      "min": 1.0,
+      "max": 3.0
+    },
+    "Number of vessels fluro": {
+      "min": 0.0,
+      "max": 3.0
+    },
+    "Thallium": {
+      "min": 3.0,
+      "max": 7.0
+    }
+  }
+}
