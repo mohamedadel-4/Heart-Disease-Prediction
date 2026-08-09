@@ -30,20 +30,22 @@ st.info(
     "Do not use the prediction to make medical decisions."
 )
 
-st.subheader("Patient Information")
-
-c1, c2 = st.columns(2)
-
-with c1:
-    age = st.number_input(
-        "Age",
-        min_value=float(config["numeric_ranges"]["Age"]["min"]),
-        max_value=float(config["numeric_ranges"]["Age"]["max"]),
-        value=float(round((config["numeric_ranges"]["Age"]["min"] +
-                           config["numeric_ranges"]["Age"]["max"]) / 2)),
-        step=1.0
-    )
+# ---------- Section 1: Demographics ----------
+st.subheader("👤 Demographics")
+d1, d2 = st.columns(2)
+with d1:
+    age = st.number_input("Age", min_value=1, max_value=120, value=50, step=1)
     gender = st.selectbox("Gender", config["categorical_features"]["Gender"])
+with d2:
+    work_type = st.selectbox("Work Type", config["categorical_features"]["work_type"])
+    smoking_status = st.selectbox("Smoking Status", config["categorical_features"]["smoking_status"])
+
+st.divider()
+
+# ---------- Section 2: Vitals ----------
+st.subheader("🩺 Vitals")
+v1, v2 = st.columns(2)
+with v1:
     bp = st.number_input(
         "Blood Pressure (BP)",
         min_value=float(config["numeric_ranges"]["BP"]["min"]),
@@ -58,6 +60,7 @@ with c1:
         value=float(config["numeric_ranges"]["Cholesterol"]["min"]),
         step=1.0
     )
+with v2:
     max_hr = st.number_input(
         "Maximum Heart Rate",
         min_value=float(config["numeric_ranges"]["Max HR"]["min"]),
@@ -73,31 +76,37 @@ with c1:
         step=0.1
     )
 
-with c2:
+st.divider()
+
+# ---------- Section 3: Cardiac Tests ----------
+st.subheader("❤️‍🩹 Cardiac Test Results")
+t1, t2 = st.columns(2)
+with t1:
     chest_pain = st.selectbox(
         "Chest Pain Type",
         sorted([int(v) for v in pd.read_csv("train_data.csv")["Chest pain type"].dropna().unique()])
     )
-    fbs = st.selectbox("FBS over 120", [0, 1])
     ekg = st.selectbox(
         "EKG Results",
         sorted([int(v) for v in pd.read_csv("train_data.csv")["EKG results"].dropna().unique()])
     )
-    exercise_angina = st.selectbox("Exercise Angina", [0, 1])
     slope = st.selectbox(
         "Slope of ST",
         sorted([int(v) for v in pd.read_csv("train_data.csv")["Slope of ST"].dropna().unique()])
-    )
-    vessels = st.selectbox(
-        "Number of Vessels Fluro",
-        sorted([int(v) for v in pd.read_csv("train_data.csv")["Number of vessels fluro"].dropna().unique()])
     )
     thallium = st.selectbox(
         "Thallium",
         sorted([int(v) for v in pd.read_csv("train_data.csv")["Thallium"].dropna().unique()])
     )
-    work_type = st.selectbox("Work Type", config["categorical_features"]["work_type"])
-    smoking_status = st.selectbox("Smoking Status", config["categorical_features"]["smoking_status"])
+with t2:
+    fbs = st.selectbox("FBS over 120", [0, 1])
+    exercise_angina = st.selectbox("Exercise Angina", [0, 1])
+    vessels = st.selectbox(
+        "Number of Vessels Fluro",
+        sorted([int(v) for v in pd.read_csv("train_data.csv")["Number of vessels fluro"].dropna().unique()])
+    )
+
+st.divider()
 
 if st.button("🔍 Predict", use_container_width=True):
     input_df = pd.DataFrame([{
@@ -136,7 +145,6 @@ if st.button("🔍 Predict", use_container_width=True):
     label = label_encoder.inverse_transform([prediction])[0]
     confidence = probabilities[prediction] * 100
 
-    st.divider()
     st.subheader("Prediction Result")
 
     if label == "Yes":
