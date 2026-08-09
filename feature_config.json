@@ -21,8 +21,7 @@
     "work_type": [
       "Govt_job",
       "Private",
-      "Self-employed",
-      "children"
+      "Self-employed"
     ],
     "smoking_status": [
       "Unknown",
@@ -34,7 +33,7 @@
   "numeric_ranges": {
     "Age": {
       "min": 1.0,
-      "max": 100.0
+      "max": 120.0
     },
     "Chest pain type": {
       "min": 1.0,
